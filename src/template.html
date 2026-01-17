@@ -66,7 +66,7 @@
                     <span class="badge badge--high-priority badge--red">High Priority</span>
                     <div class="task-controls">
                         <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                        <button class="btn-delete"><img src="./assets/images/dlt-task-icon.png" alt="delete task icon"></button>
+                        <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
                     </div>
                 </div>
             </article>
@@ -83,7 +83,7 @@
                     <span class="badge badge--high-priority badge--yellow">High Priority</span>
                     <div class="task-controls">
                         <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                        <button class="btn-delete"><img src="./assets/images/dlt-task-icon.png" alt="delete task icon"></button>
+                        <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
                     </div>
                 </div>
             </article>
@@ -100,7 +100,7 @@
                     <span class="badge badge--high-priority badge--green">High Priority</span>
                     <div class="task-controls">
                         <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                        <button class="btn-delete"><img src="./assets/images/dlt-task-icon.png" alt="delete task icon"></button>
+                        <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
                     </div>
                 </div>
             </article>
@@ -117,7 +117,7 @@
                     <span class="badge badge--high-priority badge--grey">High Priority</span>
                     <div class="task-controls">
                         <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                        <button class="btn-delete"><img src="./assets/images/dlt-task-icon.png" alt="delete task icon"></button>
+                        <button class="btn-delete"><img src="./assets/images/dlt-project-icon.png" alt="delete task icon"></button>
                     </div>
                 </div>
             </article>
@@ -125,7 +125,7 @@
     </main>
 
     <aside class="editor-panel">
-        <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/corss-icon.png" alt="close panel icon"></button>
+        <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
 
         <form class="editor-form">
             <div class="form-group">
@@ -160,46 +160,84 @@
     </aside>
 
     <aside class="editor-panel">
-    <div class="panel-header">
-        <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/corss-icon.png" alt="close panel icon"></button>
-    </div>
+      <div class="panel-header">
+          <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
+      </div>
 
-    <form class="editor-form">
-        <div class="form-group">
-            <label class="input-label">Name of task:</label>
-            <input type="text" class="input-field shadow-box" value="Marry Her">
-        </div>
+      <form class="editor-form">
+          <div class="form-group">
+              <label class="input-label">Name of task:</label>
+              <input type="text" class="input-field shadow-box" value="Marry Her">
+          </div>
 
-        <div class="form-group">
-            <label class="input-label">Description</label>
-            <textarea class="textarea-field shadow-box" rows="5">I need to marry her ASAP</textarea>
-        </div>
+          <div class="form-group">
+              <label class="input-label">Description</label>
+              <textarea class="textarea-field shadow-box" rows="5">I need to marry her ASAP</textarea>
+          </div>
 
-        <div class="form-group">
-            <label class="input-label">Priority Level:</label>
-            <div class="custom-select shadow-box">
-                <div class="select-value">
-                    <span class="color-dot color-dot--red"></span>
-                    <span class="text">High</span>
-                </div>
-                    <img src="./assets/images/dropdown-icon.png" alt="dropdown icon">
-            </div>
-        </div>
+          <div class="form-group">
+              <label class="input-label">Priority Level:</label>
+              <div class="custom-select shadow-box">
+                  <div class="select-value">
+                      <span class="color-dot color-dot--red"></span>
+                      <span class="text">High</span>
+                  </div>
+                      <img src="./assets/images/dropdown-icon.png" alt="dropdown icon">
+              </div>
+          </div>
 
-        <div class="form-group">
-            <label class="input-label">Due Date:</label>
-            <div class="date-picker-display shadow-box">
-                <img src="./assets/images/calender-icon.png" alt="calender icon">
-                <span class="date-text">24/05/25</span>
-            </div>
-        </div>
+          <div class="form-group">
+              <label class="input-label">Due Date:</label>
+              <div class="date-picker-display shadow-box">
+                  <img src="./assets/images/calender-icon.png" alt="calender icon">
+                  <span class="date-text">24/05/25</span>
+              </div>
+          </div>
 
-        <div class="panel-actions">
-            <button type="button" class="btn-save shadow-box">Save Changes</button>
-            <button type="button" class="btn-delete shadow-box">Delete</button>
-        </div>
-    </form>
-</aside>
+          <div class="panel-actions">
+              <button type="button" class="btn-save shadow-box">Save Changes</button>
+              <button type="button" class="btn-delete shadow-box">Delete</button>
+          </div>
+      </form>
+    </aside>
+    <aside class="task-details-panel">
+      <div class="panel-header">
+          <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
+      </div>
+
+      <div class="details-content">
+          <div class="info-group">
+              <span class="info-label">Name of task:</span>
+              <h3 class="info-value title-text">Marry Her</h3>
+          </div>
+
+          <div class="info-group">
+              <span class="info-label">Description</span>
+              <p class="info-value description-text">I need to marry her ASAP</p>
+          </div>
+
+          <div class="info-group">
+              <span class="info-label">Priority Level:</span>
+              <div class="info-value priority-display">
+                  <span class="color-dot color-dot--red"></span>
+                  <span class="text">High</span>
+              </div>
+          </div>
+
+          <div class="info-group">
+              <span class="info-label">Due Date:</span>
+              <div class="info-value date-display">
+                  <img src="./assets/images/calender-icon.png" alt="calender icon">
+                  <span class="text">24/05/25</span>
+              </div>
+          </div>
+      </div>
+
+      <div class="panel-actions">
+          <button type="button" class="btn-edit shadow-box">Edit</button>
+          <button type="button" class="btn-delete shadow-box">Delete</button>
+      </div>
+    </aside>
 </div>
 </body>
 </html>
