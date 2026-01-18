@@ -47,11 +47,16 @@ body {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .app-container {
     display: flex;
     height: 100vh;
+    width: 100vw;
+    max-width: 120rem;
 }
 
 .hidden {
@@ -109,6 +114,12 @@ h2 {
     width: 100%;
 }
 
+.btn-new-project:hover {
+    background-color: #FDE598;
+    cursor: pointer;
+}
+
+
 .icon-plus {
     width: 25px;
     height: 25px;
@@ -155,3 +166,203 @@ h2 {
     cursor: pointer;
 }
 
+.main-content {
+    width: 100%;
+}
+
+.project-header {
+    background-color: #F7E9BB;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7rem;
+}
+
+.project-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120pxS;
+}
+
+p {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 300;
+    color: #5F5F5E;
+
+
+}
+
+.btn-icon-delete {
+    width: 40px;
+    margin: 0 1rem;
+}
+
+.current-project-title {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: black;
+    margin-left: 1rem;
+}
+
+.icon-hash {
+    margin-right: 1.5rem;
+    background-color: #F5D569;
+    border-radius: 10px;
+    padding: 1px 12px;
+}
+
+.todo-container {
+    width: 100%;
+    height: 100%;
+
+}
+
+.task-input-placeholder {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 4.2rem;
+    width: 100%;
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: black;
+    background-color: #EAE6D8;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 1.1rem;
+    margin-top: 0.6rem;
+}
+
+.task-input-placeholder:hover {
+    background-color: #DBD8CD;
+    cursor: pointer;
+}
+
+.todo-element-container {
+    margin: 0 1.25rem;
+}
+
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6.5rem;
+    width: 100%;
+    color: black;
+    background-color: #F7E9BB;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 0 1.1rem;
+    margin-top: 1.3rem;
+}
+
+.task-card:hover {
+    background-color: #FDE598;
+    cursor: pointer;
+}
+
+.task-title {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+
+}
+
+.task-due-date {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.25rem;
+}
+
+.checkbox-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #FEFBF0;
+    margin-right: 0.5rem;
+}
+
+.task-content-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.task-content-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.badge {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.25rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    color: white;
+
+}
+
+.badge--red {
+    background-color: #FF1919;
+}
+
+.badge--yellow {
+    background-color: #F5D569;
+}
+
+.badge--green {
+    background-color: #65D38D;
+}
+
+.badge--grey {
+    background-color: #C9C9C9;
+}
+
+.task-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.5rem;
+    gap: 1.25rem;
+}
+
+.btn-edit:hover {
+    background-color: #FFC500;
+    cursor: none;
+}
+
+.btn-delete:hover {
+    background-color: #FF1919;
+    cursor: none;
+}
+
+.task-card--completed {
+    background-color: #F4EEDD;
+    color: #5F5F5E;
+    text-decoration: line-through;
+}
+
+.task-card--completed:hover {
+    background-color: #DBD8CD;
+    cursor: pointer;
+}
+
+.completed {
+    background-color: #ACA9A1;
+}
