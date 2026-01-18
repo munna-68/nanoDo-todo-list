@@ -3,39 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>nanoDo</title>
 </head>
 <body>
 <div class="app-container">
     <aside class="left-sidebar">
-        <div class="brand-header">
-            <div class="logo-wrapper">
-              <img src="./assets/images/logo.png" alt="NanoDo logo">
+        <div class="left-sidebar-container">
+            <div class="brand-header">
+                <div class="logo-wrapper">
+                  <img class="logo" src="./assets/images/logo.png" alt="NanoDo logo">
+                </div>
             </div>
+    
+            <nav class="project-navigation">
+                <h2 class="section-label">Projects</h2>
+                
+                <div class="project-list-container">
+                    <button class="btn-new-project">
+                        <img class="icon-plus" src="./assets/images/plus-icon.png" alt="plus-icon"> Add Project
+                    </button>
+        
+                    <ul class="project-list">
+                        <li class="project-item active">
+                            <span class="project-name">Default Project</span>
+                        </li>
+                        <li class="project-item">
+                            <span class="project-name">Default Project</span>
+                        </li>
+                        <li class="project-item">
+                            <span class="project-name">Default Project</span>
+                        </li>
+                        <li class="project-item">
+                            <span class="project-name">Default Project</span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-
-        <nav class="project-navigation">
-            <h2 class="section-label">Projects</h2>
-            
-            <button class="btn-new-project">
-                <span class="icon-plus">+</span> Add Project
-            </button>
-
-            <ul class="project-list">
-                <li class="project-item project-item--active">
-                    <span class="project-name">Default Project</span>
-                </li>
-                <li class="project-item">
-                    <span class="project-name">Default Project</span>
-                </li>
-                <li class="project-item">
-                    <span class="project-name">Default Project</span>
-                </li>
-                <li class="project-item">
-                    <span class="project-name">Default Project</span>
-                </li>
-            </ul>
-        </nav>
     </aside>
 
     <main class="main-content">
@@ -117,14 +121,14 @@
                     <span class="badge badge--high-priority badge--grey">High Priority</span>
                     <div class="task-controls">
                         <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                        <button class="btn-delete"><img src="./assets/images/dlt-project-icon.png" alt="delete task icon"></button>
+                        <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
                     </div>
                 </div>
             </article>
         </div>
     </main>
 
-    <aside class="editor-panel">
+    <aside class="input-panel">
         <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
 
         <form class="editor-form">
@@ -159,7 +163,7 @@
         </form>
     </aside>
 
-    <aside class="editor-panel">
+    <aside class="editor-panel hidden">
       <div class="panel-header">
           <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
       </div>
@@ -200,7 +204,7 @@
           </div>
       </form>
     </aside>
-    <aside class="task-details-panel">
+    <aside class="task-details-panel hidden">
       <div class="panel-header">
           <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
       </div>

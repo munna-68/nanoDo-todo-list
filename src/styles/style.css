@@ -42,3 +42,116 @@ img {
 }
 
 /* Actual CSS */
+
+body {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+.hidden {
+    display: none;
+}
+
+.left-sidebar {
+    width: 24vw;
+    background-color: #F2F6D0;
+
+}
+
+.logo-wrapper {
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+}
+
+h2 {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2rem;
+  color: #5F5F5E;
+
+}
+
+.left-sidebar-container {
+    width: 83%;
+    margin: 0 auto;
+
+}
+
+.btn-new-project {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 52px;
+    border: solid 1px #5F5F5E;
+    border-radius: 20px;
+    background-color: #F7E9BB;
+    margin-bottom: 2.2rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.icon-plus {
+    width: 25px;
+    height: 25px;
+    margin-right: 1rem;
+}
+
+.project-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1.5rem;
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: left;
+
+}
+
+.project-item {
+    border-bottom: 1px solid #5F5F5E;
+    padding-bottom: 5px;
+}
+
+.project-item.active {
+    border-radius: 20px;
+    background-color: #F5D569;
+    padding: 18px 52px;
+}
+
+.project-item:hover {
+    border-radius: 20px;
+    background-color: #F5D569;
+    padding: 18px 52px;
+    background-color: #F2DC93;
+    cursor: pointer;
+}
+
