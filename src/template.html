@@ -22,6 +22,10 @@
                     <button class="btn-new-project">
                         <img class="icon-plus" src="./assets/images/plus-icon.png" alt="plus-icon"> Add Project
                     </button>
+
+                    <div class="form-group hidden">
+                        <input type="text" class="input-text" placeholder="Name of Task">
+                    </div>
         
                     <ul class="project-list">
                         <li class="project-item active">
@@ -132,7 +136,7 @@
                 </div>
             </div>
 
-            <aside class="input-panel">
+            <aside class="input-panel pannel hidden">
                 <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
         
                 <form class="editor-form">
@@ -164,49 +168,49 @@
         
                     <div class="editor-footer-actions">
                         <button type="button" class="btn-save">Save Changes</button>
-                        <button type="button" class="btn-delete-task">Delete</button>
+                        <button type="button" class="dlt-btn btn-delete-task">Delete</button>
                     </div>
                 </form>
             </aside>
         
-            <aside class="editor-panel hidden">
+            <aside class="editor-panel pannel">
               <div class="panel-header">
                   <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
               </div>
         
               <form class="editor-form">
+                  <label class="input-label">Name of task:</label>
                   <div class="form-group">
-                      <label class="input-label">Name of task:</label>
                       <input type="text" class="input-field shadow-box" value="Marry Her">
                   </div>
         
+                  <label class="input-label">Description</label>
                   <div class="form-group">
-                      <label class="input-label">Description</label>
-                      <textarea class="textarea-field shadow-box" rows="5">I need to marry her ASAP</textarea>
+                      <textarea class="textarea-field" rows="5">I need to marry her ASAP</textarea>
                   </div>
         
+                  <label class="input-label">Priority Level:</label>
                   <div class="form-group">
-                      <label class="input-label">Priority Level:</label>
-                      <div class="custom-select shadow-box">
+                      <div class="custom-select custom-select-trigger">
                           <div class="select-value">
-                              <span class="color-dot color-dot--red"></span>
-                              <span class="text">High</span>
+                              <div class="color-dot color-dot--red"></div>
+                              <p class="input-txt">High</p>
                           </div>
                               <img src="./assets/images/dropdown-icon.png" alt="dropdown icon">
                       </div>
                   </div>
         
+                  <label class="input-label">Due Date:</label>
                   <div class="form-group">
-                      <label class="input-label">Due Date:</label>
-                      <div class="date-picker-display shadow-box">
-                          <img src="./assets/images/calender-icon.png" alt="calender icon">
+                      <div class="date-picker-display">
+                          <img src="./assets/images/calender-icon.png" class="calender-icon" alt="calender icon">
                           <span class="date-text">24/05/25</span>
                       </div>
                   </div>
         
                   <div class="panel-actions">
-                      <button type="button" class="btn-save shadow-box">Save Changes</button>
-                      <button type="button" class="btn-delete shadow-box">Delete</button>
+                      <button type="button" class="btn-save">Save Changes</button>
+                      <button type="button" class="dlt-btn">Delete</button>
                   </div>
               </form>
             </aside>
