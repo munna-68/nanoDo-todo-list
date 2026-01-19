@@ -173,7 +173,7 @@
                 </form>
             </aside>
         
-            <aside class="editor-panel pannel">
+            <aside class="editor-panel pannel hidden">
               <div class="panel-header">
                   <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
               </div>
@@ -215,10 +215,9 @@
               </form>
             </aside>
             
-            <aside class="task-details-panel hidden">
-              <div class="panel-header">
+            <aside class="task-details-panel pannel">
                   <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
-              </div>
+             
         
               <div class="details-content">
                   <div class="info-group">
@@ -234,7 +233,7 @@
                   <div class="info-group">
                       <span class="info-label">Priority Level:</span>
                       <div class="info-value priority-display">
-                          <span class="color-dot color-dot--red"></span>
+                          <div class="color-dot color-dot--red"></div>
                           <span class="text">High</span>
                       </div>
                   </div>
@@ -242,16 +241,16 @@
                   <div class="info-group">
                       <span class="info-label">Due Date:</span>
                       <div class="info-value date-display">
-                          <img src="./assets/images/calender-icon.png" alt="calender icon">
+                          <img src="./assets/images/calender-icon.png" class="calender-icon" alt="calender icon">
                           <span class="text">24/05/25</span>
                       </div>
                   </div>
+                  <div class="panel-actions">
+                      <button type="button" class="btn-edit btn-save">Edit</button>
+                      <button type="button" class="btn-delete dlt-btn">Delete</button>
+                  </div>
               </div>
         
-              <div class="panel-actions">
-                  <button type="button" class="btn-edit shadow-box">Edit</button>
-                  <button type="button" class="btn-delete shadow-box">Delete</button>
-              </div>
             </aside>
         </div>
     </main>
