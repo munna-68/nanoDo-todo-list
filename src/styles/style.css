@@ -209,8 +209,9 @@ p {
     margin-left: 1rem;
 }
 
+
 .icon-hash {
-    margin-right: 1.5rem;
+    margin-right: 0.5rem;
     background-color: #F5D569;
     border-radius: 10px;
     padding: 1px 12px;
@@ -365,4 +366,140 @@ p {
 
 .completed {
     background-color: #ACA9A1;
+}
+
+.input-panel {
+    position: relative;
+    width: 24vw;
+    background-color: #F2F6D0;
+    display: flex;
+    justify-content: center;
+}
+
+.main-content-container {
+    display: flex;
+    min-height: 88.5vh;
+}
+
+.btn-close-panel {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.editor-form {
+    margin-top: 6.8rem;
+    width: 310px;
+}
+
+.form-group {
+    background-color: #EAE6D8;
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.25rem;
+    border: solid 1px black;
+    box-shadow: 0px 4.06px 4.06px 0px rgba(0, 0, 0, 0.25);
+    
+}
+
+.input-txt{
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.25rem;
+}
+
+.custom-select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-picker-trigger {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+}
+
+
+
+.calender-icon {
+    margin-right: 0.5rem;
+}
+
+.color-dot {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background-color: #FF1919;
+}
+
+.color-dot--red {
+    background-color: #FF1919;
+
+}
+
+.color-dot--yellow {
+    background-color: #F5D569;
+
+}
+
+.color-dot--green {
+    background-color: #65D38D;
+
+}
+
+.select-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.btn-save {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    box-shadow: 0px 4.06px 4.06px 0px rgba(0, 0, 0, 0.25);
+    border: solid 1px black;
+    border-radius: 10px;
+    background-color: #F5D569;
+    padding: 18px 26px;
+    margin-right: 1.5rem;
+}
+
+.btn-save:hover {
+    background-color: #F9C410;
+    cursor: pointer;
+}
+
+.btn-delete-task {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #FF2727;
+    box-shadow: 0px 4.06px 4.06px 0px rgba(0, 0, 0, 0.25);
+    border: solid 1px #FF2727;
+    border-radius: 10px;
+    background-color: #EDEAE2;
+    padding: 18px 26px;
+}
+
+.btn-delete-task:hover {
+    background-color: #FF2727;
+    color: white;
+    border: solid 1px white;
+
+    cursor: pointer;
 }
