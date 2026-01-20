@@ -1,4 +1,10 @@
 import "./styles/style.css";
-import { print } from "./js/module";
+import { newProjectClickEvent, addProject, addTaskEvent, closePanelEvent, editTaskEvent, taskCardClickEvent, completeTaskEvent } from "./js/ui";  
 
-console.log(print);
+newProjectClickEvent();
+addProject();
+addTaskEvent();
+closePanelEvent();
+editTaskEvent();
+taskCardClickEvent();
+completeTaskEvent();
