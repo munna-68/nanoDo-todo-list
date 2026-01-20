@@ -9,7 +9,8 @@ const editorPanel = document.querySelector('.editor-panel');
 const taskCard = document.querySelectorAll('.task-card');
 const taskDetailsPanel = document.querySelector('.task-details-panel');
 const checkboxCircle = document.querySelectorAll('.checkbox-circle');
-const priorityBadge = document.querySelectorAll('.badge');
+const mainContentContainer = document.querySelector('.main-content-container');
+
 
 export function newProjectClickEvent() {
     newProjectBtn.addEventListener('click', () => {
@@ -29,7 +30,10 @@ export function newProjectClickEvent() {
  export function addTaskEvent() {
   taskInput.addEventListener('click', () => {
     inputPanel.classList.remove('hidden');
-  });
+    editorPanel.classList.add('hidden');
+    taskDetailsPanel.classList.add('hidden');
+    
+ });
  }
 
  export function closePanelEvent() {
@@ -44,12 +48,18 @@ export function newProjectClickEvent() {
   editBtn.addEventListener('click', e => {
     e.stopPropagation();
     editorPanel.classList.remove('hidden');
+    inputPanel.classList.add('hidden');
+    taskDetailsPanel.classList.add('hidden');
+
   });
  }
 
  export function taskCardClickEvent() {
   taskCard.forEach(card => card.addEventListener('click', () => {
     taskDetailsPanel.classList.remove('hidden');
+    editorPanel.classList.add('hidden');
+    inputPanel.classList.add('hidden');
+    
 
   }));
  }
