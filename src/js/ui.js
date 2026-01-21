@@ -9,8 +9,6 @@ const editorPanel = document.querySelector('.editor-panel');
 const taskCard = document.querySelectorAll('.task-card');
 const taskDetailsPanel = document.querySelector('.task-details-panel');
 const checkboxCircle = document.querySelectorAll('.checkbox-circle');
-const mainContentContainer = document.querySelector('.main-content-container');
-
 
 export function newProjectClickEvent() {
     newProjectBtn.addEventListener('click', () => {
