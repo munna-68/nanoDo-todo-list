@@ -8,7 +8,7 @@ import {
   taskCardClickEvent,
   completeTaskEvent,
 } from "./js/ui";
-import { addTodoToProject } from "./js/storage";
+import { addNewProject } from "./js/storage";
 
 // UI
 newProjectClickEvent();
@@ -20,4 +20,4 @@ taskCardClickEvent();
 completeTaskEvent();
 
 // Handle Todo
-addTodoToProject();
+addNewProject();
