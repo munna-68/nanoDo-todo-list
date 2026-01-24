@@ -1,260 +1,378 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nanoDo</title>
-</head>
-<body>
-<div class="app-container">
-    <aside class="left-sidebar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nanoDo</title>
+  </head>
+  <body>
+    <div class="app-container">
+      <aside class="left-sidebar">
         <div class="left-sidebar-container">
-            <div class="brand-header">
-                <div class="logo-wrapper">
-                  <img class="logo" src="./assets/images/logo.png" alt="NanoDo logo">
-                </div>
+          <div class="brand-header">
+            <div class="logo-wrapper">
+              <img
+                class="logo"
+                src="./assets/images/logo.png"
+                alt="NanoDo logo"
+              />
             </div>
-    
-            <nav class="project-navigation">
-                <h2 class="section-label">Projects</h2>
-                
-                <div class="project-list-container">
-                    <button class="btn-new-project">
-                        <img class="icon-plus" src="./assets/images/plus-icon.png" alt="plus-icon"> Add Project
-                    </button>
+          </div>
 
-                    <div class="form-group add-project-form hidden">
-                        <input type="text" class="input-text" placeholder="Name of Task">
-                    </div>
-        
-                    <ul class="project-list">
-                        <li class="project-item active">
-                            <span class="project-name">Default Project</span>
-                        </li>
-                        <li class="project-item">
-                            <span class="project-name">Default Project</span>
-                        </li>
-                        <li class="project-item">
-                            <span class="project-name">Default Project</span>
-                        </li>
-                        <li class="project-item">
-                            <span class="project-name">Default Project</span>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+          <nav class="project-navigation">
+            <h2 class="section-label">Projects</h2>
+
+            <div class="project-list-container">
+              <button class="btn-new-project">
+                <img
+                  class="icon-plus"
+                  src="./assets/images/plus-icon.png"
+                  alt="plus-icon"
+                />
+                Add Project
+              </button>
+
+              <div class="form-group add-project-form hidden">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="Name of Task"
+                />
+              </div>
+
+              <ul class="project-list">
+                <li class="project-item active">
+                  <span class="project-name">Default Project</span>
+                </li>
+                <li class="project-item">
+                  <span class="project-name">Default Project</span>
+                </li>
+                <li class="project-item">
+                  <span class="project-name">Default Project</span>
+                </li>
+                <li class="project-item">
+                  <span class="project-name">Default Project</span>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
-    </aside>
+      </aside>
 
-    <main class="main-content">
+      <main class="main-content">
         <header class="project-header">
-            <h2 class="current-project-title">
-                <span class="icon-hash">#</span> Default Project
-            </h2>
-            <div class="project-actions">
-                <p class="action-text">Delete Project</p>
-                <button class="btn-icon-delete" aria-label="Delete Project"><img src="./assets/images/dlt-project-icon.png" alt="delete project icon"></button>
-            </div>
+          <h2 class="current-project-title">
+            <span class="icon-hash">#</span> Default Project
+          </h2>
+          <div class="project-actions">
+            <p class="action-text">Delete Project</p>
+            <button class="btn-icon-delete" aria-label="Delete Project">
+              <img
+                src="./assets/images/dlt-project-icon.png"
+                alt="delete project icon"
+              />
+            </button>
+          </div>
         </header>
 
         <div class="main-content-container">
-            <div class="todo-container">
-                <div class="todo-element-container">
-                    <div class="task-input-placeholder">
-                        <img class="icon-plus" src="./assets/images/plus-icon.png" alt="plus-icon"> Add Task
-                    </div>
-            
-                    <div class="task-list">
-                        <article class="task-card">
-                            <div class="task-content-left">
-                                <div class="checkbox-circle"></div>
-                                <div class="task-details">
-                                    <h3 class="task-title">Marry Her</h3>
-                                    <span class="task-due-date">Due: Today</span>
-                                </div>
-                            </div>
-                            <div class="task-content-right">
-                                <span class="badge badge--high-priority badge--red">High Priority</span>
-                                <div class="task-controls">
-                                    <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                                    <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
-                                </div>
-                            </div>
-                        </article>
-            
-                        <article class="task-card">
-                            <div class="task-content-left">
-                                <div class="checkbox-circle"></div>
-                                <div class="task-details">
-                                    <h3 class="task-title">Gari bari</h3>
-                                    <span class="task-due-date">Due: Today</span>
-                                </div>
-                            </div>
-                            <div class="task-content-right">
-                                <span class="badge badge--high-priority badge--yellow">High Priority</span>
-                                <div class="task-controls">
-                                    <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                                    <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
-                                </div>
-                            </div>
-                        </article>
-            
-                        <article class="task-card">
-                            <div class="task-content-left">
-                                <div class="checkbox-circle"></div>
-                                <div class="task-details">
-                                    <h3 class="task-title">Sixpack</h3>
-                                    <span class="task-due-date">Due: Today</span>
-                                </div>
-                            </div>
-                            <div class="task-content-right">
-                                <span class="badge badge--high-priority badge--green">High Priority</span>
-                                <div class="task-controls">
-                                    <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                                    <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
-                                </div>
-                            </div>
-                        </article>
-            
-                        <article class="task-card task-card--completed">
-                            <div class="task-content-left">
-                                <div class="checkbox-circle completed"></div>
-                                <div class="task-details">
-                                    <h3 class="task-title">Default Project</h3>
-                                    <span class="task-due-date">Due: Today</span>
-                                </div>
-                            </div>
-                            <div class="task-content-right">
-                                <span class="badge badge--high-priority badge--grey">High Priority</span>
-                                <div class="task-controls">
-                                    <button class="btn-edit"><img src="./assets/images/edit-icon.png" alt="edit task icon"></button>
-                                    <button class="btn-delete"><img src="./assets/images/dlt-icon.png" alt="delete task icon"></button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-
-            <aside class="input-panel pannel hidden">
-                <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
-        
-                <form class="editor-form">
-                    <div class="form-group">
-                        <input type="text" class="input-text" placeholder="Name of Task">
-                    </div>
-        
-                    <div class="form-group description">
-                        <textarea class="input-textarea" placeholder="Description" rows="4"></textarea>
-                    </div>
-        
-                    <div class="form-group">
-                        <div class="custom-select-trigger">
-                            <div class="select-label">
-                                <div class="color-dot color-dot--red"></div> <p class="input-txt">Set Priority</p>
-                            </div>
-                            <img src="./assets/images/dropdown-icon.png" alt="dropdown icon">
-                        </div>
-                    </div>
-        
-                    <div class="form-group">
-                        <div class="date-picker-trigger">
-                            <img src="./assets/images/calender-icon.png" class="calender-icon" alt="calender icon">
-                            <p class="input-txt">
-                                <span class="date-picker-label">Set Date</span>
-                            </p>
-                        </div>
-                    </div>
-        
-                    <div class="editor-footer-actions">
-                        <button type="button" class="btn-save">Add Task</button>
-                        <button type="button" class="dlt-btn btn-delete-task">Delete</button>
-                    </div>
-                </form>
-            </aside>
-        
-            <aside class="editor-panel pannel hidden">
-                
-              <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
-              
-        
-              <form class="editor-form">
-                  <label class="input-label">Name of task:</label>
-                  <div class="form-group">
-                      <input type="text" class="input-field shadow-box" value="Marry Her">
-                  </div>
-        
-                  <label class="input-label">Description</label>
-                  <div class="form-group">
-                      <textarea class="textarea-field" rows="5">I need to marry her ASAP</textarea>
-                  </div>
-        
-                  <label class="input-label">Priority Level:</label>
-                  <div class="form-group">
-                      <div class="custom-select custom-select-trigger">
-                          <div class="select-value">
-                              <div class="color-dot color-dot--red"></div>
-                              <p class="input-txt">High</p>
-                          </div>
-                              <img src="./assets/images/dropdown-icon.png" alt="dropdown icon">
-                      </div>
-                  </div>
-        
-                  <label class="input-label">Due Date:</label>
-                  <div class="form-group">
-                      <div class="date-picker-display">
-                          <img src="./assets/images/calender-icon.png" class="calender-icon" alt="calender icon">
-                          <span class="date-text">24/05/25</span>
-                      </div>
-                  </div>
-        
-                  <div class="panel-actions">
-                      <button type="button" class="btn-save">Save Changes</button>
-                      <button type="button" class="dlt-btn">Delete</button>
-                  </div>
-              </form>
-            </aside>
-            
-            <aside class="task-details-panel pannel hidden">
-                  <button class="btn-close-panel" aria-label="Close panel"><img src="./assets/images/cross-icon.png" alt="close panel icon"></button>
-             
-        
-              <div class="details-content">
-                  <div class="info-group">
-                      <span class="info-label">Name of task:</span>
-                      <h3 class="info-value title-text">Marry Her</h3>
-                  </div>
-        
-                  <div class="info-group">
-                      <span class="info-label">Description</span>
-                      <p class="info-value description-text">I need to marry her ASAP</p>
-                  </div>
-        
-                  <div class="info-group">
-                      <span class="info-label">Priority Level:</span>
-                      <div class="info-value priority-display">
-                          <div class="color-dot color-dot--red"></div>
-                          <span class="text">High</span>
-                      </div>
-                  </div>
-        
-                  <div class="info-group">
-                      <span class="info-label">Due Date:</span>
-                      <div class="info-value date-display">
-                          <img src="./assets/images/calender-icon.png" class="calender-icon" alt="calender icon">
-                          <span class="text">24/05/25</span>
-                      </div>
-                  </div>
-                  <div class="panel-actions">
-                      <button type="button" class="btn-edit btn-save">Edit</button>
-                      <button type="button" class="btn-delete dlt-btn">Delete</button>
-                  </div>
+          <div class="todo-container">
+            <div class="todo-element-container">
+              <div class="task-input-placeholder">
+                <img
+                  class="icon-plus"
+                  src="./assets/images/plus-icon.png"
+                  alt="plus-icon"
+                />
+                Add Task
               </div>
-        
-            </aside>
-        </div>
-    </main>
 
-</div>
-</body>
+              <div class="task-list">
+                <article class="task-card">
+                  <div class="task-content-left">
+                    <div class="checkbox-circle"></div>
+                    <div class="task-details">
+                      <h3 class="task-title">Marry Her</h3>
+                      <span class="task-due-date">Due: Today</span>
+                    </div>
+                  </div>
+                  <div class="task-content-right">
+                    <span class="badge badge--high-priority badge--red"
+                      >High Priority</span
+                    >
+                    <div class="task-controls">
+                      <button class="btn-edit">
+                        <img
+                          src="./assets/images/edit-icon.png"
+                          alt="edit task icon"
+                        />
+                      </button>
+                      <button class="btn-delete">
+                        <img
+                          src="./assets/images/dlt-icon.png"
+                          alt="delete task icon"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="task-card">
+                  <div class="task-content-left">
+                    <div class="checkbox-circle"></div>
+                    <div class="task-details">
+                      <h3 class="task-title">Gari bari</h3>
+                      <span class="task-due-date">Due: Today</span>
+                    </div>
+                  </div>
+                  <div class="task-content-right">
+                    <span class="badge badge--high-priority badge--yellow"
+                      >High Priority</span
+                    >
+                    <div class="task-controls">
+                      <button class="btn-edit">
+                        <img
+                          src="./assets/images/edit-icon.png"
+                          alt="edit task icon"
+                        />
+                      </button>
+                      <button class="btn-delete">
+                        <img
+                          src="./assets/images/dlt-icon.png"
+                          alt="delete task icon"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="task-card">
+                  <div class="task-content-left">
+                    <div class="checkbox-circle"></div>
+                    <div class="task-details">
+                      <h3 class="task-title">Sixpack</h3>
+                      <span class="task-due-date">Due: Today</span>
+                    </div>
+                  </div>
+                  <div class="task-content-right">
+                    <span class="badge badge--high-priority badge--green"
+                      >High Priority</span
+                    >
+                    <div class="task-controls">
+                      <button class="btn-edit">
+                        <img
+                          src="./assets/images/edit-icon.png"
+                          alt="edit task icon"
+                        />
+                      </button>
+                      <button class="btn-delete">
+                        <img
+                          src="./assets/images/dlt-icon.png"
+                          alt="delete task icon"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="task-card task-card--completed">
+                  <div class="task-content-left">
+                    <div class="checkbox-circle completed"></div>
+                    <div class="task-details">
+                      <h3 class="task-title">Default Project</h3>
+                      <span class="task-due-date">Due: Today</span>
+                    </div>
+                  </div>
+                  <div class="task-content-right">
+                    <span class="badge badge--high-priority badge--grey"
+                      >High Priority</span
+                    >
+                    <div class="task-controls">
+                      <button class="btn-edit">
+                        <img
+                          src="./assets/images/edit-icon.png"
+                          alt="edit task icon"
+                        />
+                      </button>
+                      <button class="btn-delete">
+                        <img
+                          src="./assets/images/dlt-icon.png"
+                          alt="delete task icon"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <aside class="input-panel pannel hidden">
+            <button class="btn-close-panel" aria-label="Close panel">
+              <img
+                src="./assets/images/cross-icon.png"
+                alt="close panel icon"
+              />
+            </button>
+
+            <form class="editor-form">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="Name of Task"
+                />
+              </div>
+
+              <div class="form-group description">
+                <textarea
+                  class="input-textarea"
+                  placeholder="Description"
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <div class="custom-select-trigger">
+                  <div class="select-label">
+                    <div class="color-dot color-dot--red"></div>
+                    <p class="input-txt">Set Priority</p>
+                  </div>
+                  <img
+                    src="./assets/images/dropdown-icon.png"
+                    alt="dropdown icon"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="date-picker-trigger">
+                  <img
+                    src="./assets/images/calender-icon.png"
+                    class="calender-icon"
+                    alt="calender icon"
+                  />
+                  <p class="input-txt">
+                    <span class="date-picker-label">Set Date</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="editor-footer-actions">
+                <button type="button" class="btn-save">Add Task</button>
+                <button type="button" class="dlt-btn btn-delete-task">
+                  Delete
+                </button>
+              </div>
+            </form>
+          </aside>
+
+          <aside class="editor-panel pannel hidden">
+            <button class="btn-close-panel" aria-label="Close panel">
+              <img
+                src="./assets/images/cross-icon.png"
+                alt="close panel icon"
+              />
+            </button>
+
+            <form class="editor-form">
+              <label class="input-label">Name of task:</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="input-field shadow-box"
+                  value="Marry Her"
+                />
+              </div>
+
+              <label class="input-label">Description</label>
+              <div class="form-group">
+                <textarea class="textarea-field" rows="5">
+I need to marry her ASAP</textarea
+                >
+              </div>
+
+              <label class="input-label">Priority Level:</label>
+              <div class="form-group">
+                <div class="custom-select custom-select-trigger">
+                  <div class="select-value">
+                    <div class="color-dot color-dot--red"></div>
+                    <p class="input-txt">High</p>
+                  </div>
+                  <img
+                    src="./assets/images/dropdown-icon.png"
+                    alt="dropdown icon"
+                  />
+                </div>
+              </div>
+
+              <label class="input-label">Due Date:</label>
+              <div class="form-group">
+                <div class="date-picker-display">
+                  <img
+                    src="./assets/images/calender-icon.png"
+                    class="calender-icon"
+                    alt="calender icon"
+                  />
+                  <span class="date-text">24/05/25</span>
+                </div>
+              </div>
+
+              <div class="panel-actions">
+                <button type="button" class="btn-save">Save Changes</button>
+                <button type="button" class="dlt-btn">Delete</button>
+              </div>
+            </form>
+          </aside>
+
+          <aside class="task-details-panel pannel hidden">
+            <button class="btn-close-panel" aria-label="Close panel">
+              <img
+                src="./assets/images/cross-icon.png"
+                alt="close panel icon"
+              />
+            </button>
+
+            <div class="details-content">
+              <div class="info-group">
+                <span class="info-label">Name of task:</span>
+                <h3 class="info-value title-text">Marry Her</h3>
+              </div>
+
+              <div class="info-group">
+                <span class="info-label">Description</span>
+                <p class="info-value description-text">
+                  I need to marry her ASAP
+                </p>
+              </div>
+
+              <div class="info-group">
+                <span class="info-label">Priority Level:</span>
+                <div class="info-value priority-display">
+                  <div class="color-dot color-dot--red"></div>
+                  <span class="text">High</span>
+                </div>
+              </div>
+
+              <div class="info-group">
+                <span class="info-label">Due Date:</span>
+                <div class="info-value date-display">
+                  <img
+                    src="./assets/images/calender-icon.png"
+                    class="calender-icon"
+                    alt="calender icon"
+                  />
+                  <span class="text">24/05/25</span>
+                </div>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn-edit btn-save">Edit</button>
+                <button type="button" class="btn-delete dlt-btn">Delete</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
