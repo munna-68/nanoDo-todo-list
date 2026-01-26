@@ -9,14 +9,15 @@ const editorPanel = document.querySelector(".editor-panel");
 const taskCard = document.querySelectorAll(".task-card");
 const taskDetailsPanel = document.querySelector(".task-details-panel");
 const checkboxCircle = document.querySelectorAll(".checkbox-circle");
+const taskList = document.querySelector(".task-list");
 
-export function newProjectClickEvent() {
+function newProjectClickEvent() {
   newProjectBtn.addEventListener("click", () => {
     formGroup.classList.remove("hidden");
   });
 }
 
-export function addProject() {
+function addProject() {
   formGroup.addEventListener("keydown", (e) => {
     if (e.key !== "Enter") return;
     if (e.key === "Enter") {
@@ -25,7 +26,7 @@ export function addProject() {
   });
 }
 
-export function addTaskEvent() {
+function addTaskEvent() {
   taskInput.addEventListener("click", () => {
     inputPanel.classList.remove("hidden");
     editorPanel.classList.add("hidden");
@@ -33,7 +34,7 @@ export function addTaskEvent() {
   });
 }
 
-export function closePanelEvent() {
+function closePanelEvent() {
   const btnClosePanel = document.querySelectorAll(".btn-close-panel");
   btnClosePanel.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -43,7 +44,7 @@ export function closePanelEvent() {
   });
 }
 
-export function editTaskEvent() {
+function editTaskEvent() {
   editBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     editorPanel.classList.remove("hidden");
@@ -51,8 +52,7 @@ export function editTaskEvent() {
     taskDetailsPanel.classList.add("hidden");
   });
 }
-
-export function taskCardClickEvent() {
+function taskCardClickEvent() {
   taskCard.forEach((card) =>
     card.addEventListener("click", () => {
       taskDetailsPanel.classList.remove("hidden");
@@ -61,8 +61,7 @@ export function taskCardClickEvent() {
     }),
   );
 }
-
-export function completeTaskEvent() {
+function completeTaskEvent() {
   checkboxCircle.forEach((checkBox) =>
     checkBox.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -76,3 +75,31 @@ export function completeTaskEvent() {
     }),
   );
 }
+
+function toggleActiveProject(projectItem) {
+  const allProjectItems = document.querySelectorAll(".project-item");
+  allProjectItems.forEach((item) => {
+    item.classList.remove("active");
+  });
+  projectItem.classList.add("active");
+}
+
+function switchProjectEvent() {
+  const projectItems = document.querySelectorAll(".project-item");
+  projectItems.forEach((item) =>
+    item.addEventListener("click", () => {
+      toggleActiveProject(item);
+    }),
+  );
+}
+
+export {
+  newProjectClickEvent,
+  addProject,
+  addTaskEvent,
+  closePanelEvent,
+  editTaskEvent,
+  taskCardClickEvent,
+  completeTaskEvent,
+  switchProjectEvent,
+};

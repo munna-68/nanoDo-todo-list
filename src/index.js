@@ -7,6 +7,7 @@ import {
   editTaskEvent,
   taskCardClickEvent,
   completeTaskEvent,
+  switchProjectEvent,
 } from "./js/ui";
 import { addNewProject } from "./js/storage";
 
@@ -18,6 +19,7 @@ closePanelEvent();
 editTaskEvent();
 taskCardClickEvent();
 completeTaskEvent();
+switchProjectEvent();
 
 // Handle Todo
 addNewProject();
