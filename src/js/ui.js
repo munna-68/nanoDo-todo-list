@@ -221,6 +221,23 @@ function bindCompleteTaskButtons() {
   });
 }
 
+function updateCurrentProjectHeader(projectName) {
+  const headerTitle = document.querySelector(".current-project-title");
+  if (!headerTitle) return;
+
+  headerTitle.innerHTML = "";
+
+  const iconHash = document.createElement("span");
+  iconHash.className = "icon-hash";
+  iconHash.textContent = "#";
+  headerTitle.appendChild(iconHash);
+
+  // project name can be simple text node so it doesn't wrap in extra
+  // paragraph elements that could stack up.
+  const textNode = document.createTextNode(projectName);
+  headerTitle.appendChild(textNode);
+}
+
 function bindProjectSwitching() {
   const projectList = document.querySelector(".project-list");
 
@@ -235,10 +252,7 @@ function bindProjectSwitching() {
     // update header and task list for selected project
     const projectName = projectItem.dataset.projectName;
     if (projectName) {
-      const headerTitle = document.querySelector(".current-project-title");
-      if (headerTitle) {
-        headerTitle.textContent = `# ${projectName}`;
-      }
+      updateCurrentProjectHeader(projectName);
       Storage.renderTodosForProject(projectName);
     }
   });
@@ -252,4 +266,5 @@ export const UI = {
   bindTaskCardClicks,
   bindCompleteTaskButtons,
   bindProjectSwitching,
+  updateCurrentProjectHeader,
 };

@@ -275,7 +275,14 @@ function loadProjects() {
     if (first) {
       first.classList.add("active");
       const headerTitle = document.querySelector(".current-project-title");
-      if (headerTitle) headerTitle.textContent = `# ${projects[0].name}`;
+      if (headerTitle) {
+        headerTitle.innerHTML = "";
+        const iconHash = document.createElement("span");
+        iconHash.className = "icon-hash";
+        iconHash.textContent = "#";
+        headerTitle.appendChild(iconHash);
+        headerTitle.appendChild(document.createTextNode(projects[0].name));
+      }
       renderTodosForProject(projects[0].name);
     }
   }
