@@ -1,31 +1,43 @@
-import { deleteProjectFromStorage } from "./storage.js";
+/* ----------------------------------
+   Imports
+   ---------------------------------- */
+import { Storage } from "./storage.js";
 
-const deleteProjectBtn = document.querySelector("btn-icon-delete");
+/* ----------------------------------
+   Event binding
+   ---------------------------------- */
+function bindDeleteProjectButton() {
+  const deleteProjectButton = document.querySelector(".btn-icon-delete");
 
-function deleteProjectEvent() {
-  deleteProjectBtn.addEventListener("click", () => {
+  if (!deleteProjectButton) return;
+
+  deleteProjectButton.addEventListener("click", () => {
     const activeProjectItem = document.querySelector(".project-item.active");
     if (!activeProjectItem) return;
 
-    const projectName =
-      activeProjectItem.querySelector(".project-name").textContent;
+    // project name is stored on the list item dataset now
+    const projectName = activeProjectItem.dataset.projectName;
 
-    // Confirm deletion
+    if (!projectName) return;
+
     const confirmDelete = confirm(
       `Are you sure you want to delete the project "${projectName}"? This action cannot be undone.`,
     );
     if (!confirmDelete) return;
 
-    // Delete from storage
-    deleteProjectFromStorage(projectName);
-
-    // Remove from UI
+    Storage.deleteProject(projectName);
     activeProjectItem.remove();
 
-    // Optionally, you might want to clear the task list or switch to a default project
     const taskList = document.querySelector(".task-list");
-    taskList.innerHTML = "";
+    if (taskList) {
+      taskList.innerHTML = "";
+    }
   });
 }
 
-export { deleteProjectEvent };
+/* ----------------------------------
+   Public API
+   ---------------------------------- */
+export const DeleteProject = {
+  bindDeleteProjectButton,
+};

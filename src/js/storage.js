@@ -1,12 +1,55 @@
-function getAllProjects() {
-  return JSON.parse(localStorage.getItem("projects")) || {};
+const PROJECTS_STORAGE_KEY = "projects";
+const MAX_PROJECT_NAME_LENGTH = 20;
+const HIDDEN_CLASS = "hidden";
+
+/* ----------------------------------
+   Rendering helpers (inline DOM lookups)
+   ---------------------------------- */
+function renderProject(projectName) {
+  // if a list item for this project already exists, return it
+  const projectItems = document.querySelectorAll(".project-item");
+  const existing = Array.from(projectItems).find((item) => {
+    // prefer the data attribute instead of the text of the span
+    const currentProjectName = item.dataset.projectName;
+    return currentProjectName === projectName;
+  });
+
+  if (existing) {
+    return existing;
+  }
+
+  const projectList = document.querySelector(".project-list");
+  if (!projectList) return null;
+
+  const listItem = document.createElement("li");
+  const projectNameLabel = document.createElement("span");
+
+  listItem.className = "project-item";
+  listItem.dataset.projectName = projectName;
+  projectNameLabel.className = "project-name";
+  projectNameLabel.textContent = projectName;
+
+  listItem.appendChild(projectNameLabel);
+  projectList.appendChild(listItem);
+
+  return listItem;
 }
 
+/* ----------------------------------
+   Persistence Helpers
+   ---------------------------------- */
 function saveAllProjects(projects) {
-  localStorage.setItem("projects", JSON.stringify(projects));
+  localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects));
 }
 
-function saveProjectToStorage(projectName) {
+function getAllProjects() {
+  return JSON.parse(localStorage.getItem(PROJECTS_STORAGE_KEY)) || {};
+}
+
+/* ----------------------------------
+   CRUD Operations
+   ---------------------------------- */
+function createProject(projectName) {
   const projects = getAllProjects();
 
   if (projects[projectName]) {
@@ -23,7 +66,7 @@ function saveProjectToStorage(projectName) {
   return true;
 }
 
-function deleteProjectFromStorage(projectName) {
+function deleteProject(projectName) {
   const projects = getAllProjects();
 
   delete projects[projectName];
@@ -58,7 +101,6 @@ function deleteTodoFromProject(projectName, todoId) {
 
   if (!projects[projectName]) return false;
 
-  // only the todo that matches the id are kept
   projects[projectName].todos = projects[projectName].todos.filter(
     (todo) => todo.id !== todoId,
   );
@@ -78,81 +120,70 @@ function updateTodoInProject(projectName, todoId, updatedData) {
 
   if (todoIndex === -1) return false;
 
-  // Merge existing todo with updated fields
-  const oldTodo = projects[projectName].todos[todoIndex];
-
-  const newTodo = {
-    ...oldTodo,
+  const existingTodo = projects[projectName].todos[todoIndex];
+  const nextTodo = {
+    ...existingTodo,
     ...updatedData,
   };
 
-  projects[projectName].todos[todoIndex] = newTodo;
+  projects[projectName].todos[todoIndex] = nextTodo;
 
   saveAllProjects(projects);
   return true;
 }
 
-function getTodosForProject(projectName) {
+function getProjectTodos(projectName) {
   const projects = getAllProjects();
   return projects[projectName]?.todos || [];
 }
 
-// Render a new project in the UI
-
-function renderNewProject(projectName) {
-  const li = document.createElement("li");
-  const span = document.createElement("span");
-
-  li.className = "project-item";
-  li.dataset.projectName = projectName; // Store name for reference
-  span.className = "project-name";
-  span.textContent = projectName;
-
-  li.appendChild(span);
-  document.querySelector("ul").appendChild(li);
-  return li;
-}
-
-// Load all projects on page load
-function loadProjectsFromStorage() {
+function loadProjects() {
   const projects = getAllProjects();
 
   Object.keys(projects).forEach((projectName) => {
-    renderNewProject(projectName);
+    renderProject(projectName);
   });
 }
 
-export function addNewProject() {
-  const formGroup = document.querySelector(".add-project-form");
-  const inputElement = formGroup.querySelector(".input-text");
+/* ----------------------------------
+   Binding & Initialization
+   ---------------------------------- */
+function bindNewProjectForm() {
+  const projectForm = document.querySelector(".add-project-form");
+  const inputElement = projectForm?.querySelector(".input-text");
 
-  formGroup.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter") return;
+  if (!projectForm || !inputElement) return;
+
+  projectForm.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
 
     const inputValue = inputElement.value.trim();
 
     if (inputValue === "") return;
 
-    if (inputValue.length > 20) {
+    if (inputValue.length > MAX_PROJECT_NAME_LENGTH) {
       alert("Project name must be 20 characters or less.");
       return;
     }
 
-    if (saveProjectToStorage(inputValue)) {
-      formGroup.classList.add("hidden");
-      const li = renderNewProject(inputValue);
-      li.classList.add(inputValue);
+    if (createProject(inputValue)) {
+      projectForm.classList.add(HIDDEN_CLASS);
+      renderProject(inputValue);
       inputElement.value = "";
     }
   });
 }
 
-export {
+/* ----------------------------------
+   Public API
+   ---------------------------------- */
+export const Storage = {
+  bindNewProjectForm,
   getAllProjects,
-  deleteProjectFromStorage,
+  deleteProject,
   addTodoToProject,
   deleteTodoFromProject,
   updateTodoInProject,
-  getTodosForProject,
-  loadProjectsFromStorage,
+  getProjectTodos,
+  loadProjects,
 };

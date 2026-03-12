@@ -1,81 +1,32 @@
-const newProjectBtn = document.querySelector(".btn-new-project");
-const formGroup = document.querySelector(".form-group");
-const taskInput = document.querySelector(".task-input-placeholder");
-const inputPanel = document.querySelector(".input-panel");
-const panel = document.querySelector(".pannel");
-const editBtn = document.querySelector(".btn-edit");
-const deleteBtn = document.querySelector(".btn-delete");
-const editorPanel = document.querySelector(".editor-panel");
-const taskCard = document.querySelectorAll(".task-card");
-const taskDetailsPanel = document.querySelector(".task-details-panel");
-const checkboxCircle = document.querySelectorAll(".checkbox-circle");
-const taskList = document.querySelector(".task-list");
+/* ----------------------------------
+   Constants & Selectors
+   ---------------------------------- */
+const HIDDEN_CLASS = "hidden";
 
-function newProjectClickEvent() {
-  newProjectBtn.addEventListener("click", () => {
-    formGroup.classList.remove("hidden");
+export const projectForm = document.querySelector(".add-project-form");
+export const inputPanel = document.querySelector(".input-panel");
+export const editorPanel = document.querySelector(".editor-panel");
+export const taskDetailsPanel = document.querySelector(".task-details-panel");
+export const panels = [inputPanel, editorPanel, taskDetailsPanel].filter(
+  Boolean,
+);
+
+/* ----------------------------------
+   Panel Management Helpers
+   ---------------------------------- */
+function showPanel(activePanel) {
+  panels.forEach((panel) => {
+    panel.classList.toggle(HIDDEN_CLASS, panel !== activePanel);
   });
 }
 
-function addProject() {
-  formGroup.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter") return;
-    if (e.key === "Enter") {
-      formGroup.classList.add("hidden");
-    }
-  });
+function hidePanel(panel) {
+  panel?.classList.add(HIDDEN_CLASS);
 }
 
-function addTaskEvent() {
-  taskInput.addEventListener("click", () => {
-    inputPanel.classList.remove("hidden");
-    editorPanel.classList.add("hidden");
-    taskDetailsPanel.classList.add("hidden");
-  });
-}
-
-function closePanelEvent() {
-  const btnClosePanel = document.querySelectorAll(".btn-close-panel");
-  btnClosePanel.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const panel = btn.closest(".pannel");
-      panel.classList.add("hidden");
-    });
-  });
-}
-
-function editTaskEvent() {
-  editBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    editorPanel.classList.remove("hidden");
-    inputPanel.classList.add("hidden");
-    taskDetailsPanel.classList.add("hidden");
-  });
-}
-function taskCardClickEvent() {
-  taskCard.forEach((card) =>
-    card.addEventListener("click", () => {
-      taskDetailsPanel.classList.remove("hidden");
-      editorPanel.classList.add("hidden");
-      inputPanel.classList.add("hidden");
-    }),
-  );
-}
-function completeTaskEvent() {
-  checkboxCircle.forEach((checkBox) =>
-    checkBox.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      const card = checkBox.closest(".task-card");
-      const badge = card.querySelector(".badge");
-
-      card.classList.toggle("task-card--completed");
-      checkBox.classList.toggle("completed");
-      badge.classList.toggle("badge--grey");
-    }),
-  );
-}
-
+/* ----------------------------------
+   Project Sidebar Helpers
+   ---------------------------------- */
 function toggleActiveProject(projectItem) {
   const allProjectItems = document.querySelectorAll(".project-item");
   allProjectItems.forEach((item) => {
@@ -84,22 +35,125 @@ function toggleActiveProject(projectItem) {
   projectItem.classList.add("active");
 }
 
-function switchProjectEvent() {
-  const projectItems = document.querySelectorAll(".project-item");
-  projectItems.forEach((item) =>
-    item.addEventListener("click", () => {
-      toggleActiveProject(item);
-    }),
-  );
+/* ----------------------------------
+   Event binding functions
+   ---------------------------------- */
+
+function bindNewProjectButton() {
+  const newProjectButton = document.querySelector(".btn-new-project");
+
+  if (!newProjectButton || !projectForm) return;
+
+  newProjectButton.addEventListener("click", () => {
+    projectForm.classList.remove(HIDDEN_CLASS);
+  });
 }
 
-export {
-  newProjectClickEvent,
-  addProject,
-  addTaskEvent,
-  closePanelEvent,
-  editTaskEvent,
-  taskCardClickEvent,
-  completeTaskEvent,
-  switchProjectEvent,
+function bindAddTaskButton() {
+  const taskInputPlaceholder = document.querySelector(
+    ".task-input-placeholder",
+  );
+
+  if (!taskInputPlaceholder || !inputPanel) return;
+
+  taskInputPlaceholder.addEventListener("click", () => {
+    showPanel(inputPanel);
+  });
+}
+
+function bindPanelCloseButtons() {
+  const closeButtons = document.querySelectorAll(".btn-close-panel");
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      hidePanel(button.closest(".pannel"));
+    });
+  });
+}
+
+function bindEditTaskButtons() {
+  const taskList = document.querySelector(".task-list");
+
+  if (taskList && editorPanel) {
+    taskList.addEventListener("click", (event) => {
+      const editButton = event.target.closest(".btn-edit");
+      if (!editButton) return;
+
+      event.stopPropagation();
+      showPanel(editorPanel);
+    });
+  }
+
+  if (!taskDetailsPanel || !editorPanel) return;
+
+  taskDetailsPanel.addEventListener("click", (event) => {
+    const editButton = event.target.closest(".btn-edit");
+    if (!editButton) return;
+
+    event.stopPropagation();
+    showPanel(editorPanel);
+  });
+}
+
+function bindTaskCardClicks() {
+  const taskList = document.querySelector(".task-list");
+
+  if (!taskList || !taskDetailsPanel) return;
+
+  taskList.addEventListener("click", (event) => {
+    if (event.target.closest(".btn-edit, .btn-delete, .checkbox-circle")) {
+      return;
+    }
+
+    const taskCard = event.target.closest(".task-card");
+    if (!taskCard) return;
+
+    showPanel(taskDetailsPanel);
+  });
+}
+
+function bindCompleteTaskButtons() {
+  const taskList = document.querySelector(".task-list");
+
+  if (!taskList) return;
+
+  taskList.addEventListener("click", (event) => {
+    const checkboxCircle = event.target.closest(".checkbox-circle");
+    if (!checkboxCircle) return;
+
+    event.stopPropagation();
+
+    const taskCard = checkboxCircle.closest(".task-card");
+    const badge = taskCard?.querySelector(".badge");
+
+    taskCard?.classList.toggle("task-card--completed");
+    checkboxCircle.classList.toggle("completed");
+    badge?.classList.toggle("badge--grey");
+  });
+}
+
+function bindProjectSwitching() {
+  const projectList = document.querySelector(".project-list");
+
+  if (!projectList) return;
+
+  projectList.addEventListener("click", (event) => {
+    const projectItem = event.target.closest(".project-item");
+    if (!projectItem) return;
+
+    toggleActiveProject(projectItem);
+  });
+}
+
+/* ----------------------------------
+   Public API
+   ---------------------------------- */
+export const UI = {
+  bindNewProjectButton,
+  bindAddTaskButton,
+  bindPanelCloseButtons,
+  bindEditTaskButtons,
+  bindTaskCardClicks,
+  bindCompleteTaskButtons,
+  bindProjectSwitching,
 };
