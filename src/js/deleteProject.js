@@ -1,6 +1,3 @@
-/* ----------------------------------
-   Imports
-   ---------------------------------- */
 import { Storage } from "./storage.js";
 
 /* ----------------------------------
@@ -26,6 +23,7 @@ function bindDeleteProjectButton() {
     if (!confirmDelete) return;
 
     Storage.deleteProject(projectName);
+    // removes active project from the dom
     activeProjectItem.remove();
 
     const taskList = document.querySelector(".task-list");
@@ -35,9 +33,6 @@ function bindDeleteProjectButton() {
   });
 }
 
-/* ----------------------------------
-   Public API
-   ---------------------------------- */
 export const DeleteProject = {
   bindDeleteProjectButton,
 };
