@@ -21,6 +21,7 @@ UI.bindEditTaskButtons();
 UI.bindTaskCardClicks();
 UI.bindCompleteTaskButtons();
 UI.bindProjectSwitching();
+UI.bindLogoClick();
 
 // storage-related bindings
 Storage.bindNewProjectForm();

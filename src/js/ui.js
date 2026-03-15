@@ -37,6 +37,14 @@ function bindNewProjectButton() {
   });
 }
 
+function bindLogoClick() {
+  const logo = document.querySelector(".logo");
+  if (!logo) return;
+  logo.addEventListener("click", () => {
+    window.location.reload();
+  });
+}
+
 function bindAddTaskButton() {
   const taskInputPlaceholder = document.querySelector(
     ".task-input-placeholder",
@@ -266,5 +274,6 @@ export const UI = {
   bindTaskCardClicks,
   bindCompleteTaskButtons,
   bindProjectSwitching,
+  bindLogoClick,
   updateCurrentProjectHeader,
 };
