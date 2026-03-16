@@ -266,6 +266,20 @@ function bindProjectSwitching() {
   });
 }
 
+function CancelBtn() {
+  const cancelBtn = document.querySelector("#cancelBtn");
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      inputPanel.classList.add("hidden");
+      const inputs = inputPanel.querySelectorAll("input, textarea");
+
+      inputs.forEach((input) => {
+        input.value = "";
+      });
+    });
+  }
+}
+
 export const UI = {
   bindNewProjectButton,
   bindAddTaskButton,
@@ -276,4 +290,5 @@ export const UI = {
   bindProjectSwitching,
   bindLogoClick,
   updateCurrentProjectHeader,
+  CancelBtn,
 };

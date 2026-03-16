@@ -22,6 +22,7 @@ UI.bindTaskCardClicks();
 UI.bindCompleteTaskButtons();
 UI.bindProjectSwitching();
 UI.bindLogoClick();
+UI.CancelBtn();
 
 // storage-related bindings
 Storage.bindNewProjectForm();
