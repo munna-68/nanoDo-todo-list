@@ -1,5 +1,6 @@
 import editIcon from "../assets/images/edit-icon.png";
 import deleteIcon from "../assets/images/dlt-icon.png";
+import { formatDateDisplay } from "./dateUtils.js";
 // localStorage key where projects array is stored
 
 const PROJECTS_STORAGE_KEY = "projects";
@@ -65,7 +66,9 @@ function renderTodoItem(todo) {
 
   const dueEl = document.createElement("span");
   dueEl.className = "task-due-date";
-  dueEl.textContent = todo.dueDate ? `Due: ${todo.dueDate}` : "Due: Unknown";
+  dueEl.textContent = todo.dueDate
+    ? `Due: ${formatDateDisplay(todo.dueDate)}`
+    : "Due: Set Date";
 
   details.appendChild(titleEl);
   details.appendChild(dueEl);

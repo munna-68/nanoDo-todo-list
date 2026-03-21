@@ -1,4 +1,9 @@
 import { Storage } from "./storage.js";
+import {
+  formatDateDisplay,
+  getDateParts,
+  normalizeDateForStorage,
+} from "./dateUtils.js";
 
 export const projectForm = document.querySelector(".add-project-form");
 export const inputPanel = document.querySelector(".input-panel");
@@ -29,8 +34,23 @@ const PRIORITY_DOT_CLASSES = [
   "color-dot--yellow",
   "color-dot--green",
 ];
+const DATE_PICKER_MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 let priorityDropdownsBound = false;
+let datePickerOutsideBound = false;
 
 function showPanel(activePanel) {
   panels.forEach((panel) => {
@@ -88,6 +108,256 @@ function getDetailsDate() {
   return taskDetailsPanel?.querySelector(".date-display .text") || null;
 }
 
+function pad2(value) {
+  return String(value).padStart(2, "0");
+}
+
+function getDateInput(panel) {
+  return panel?.querySelector("[data-due-date-input]") || null;
+}
+
+function getDateTrigger(panel) {
+  return panel?.querySelector("[data-date-trigger]") || null;
+}
+
+function getDateLabel(panel) {
+  return panel?.querySelector("[data-date-label]") || null;
+}
+
+function getDatePicker(panel) {
+  return panel?.querySelector("[data-date-picker]") || null;
+}
+
+function getDateGrid(panel) {
+  return panel?.querySelector("[data-date-grid]") || null;
+}
+
+function getDateMonthLabel(panel) {
+  return panel?.querySelector("[data-date-month-label]") || null;
+}
+
+function closeDatePicker(panel) {
+  const trigger = getDateTrigger(panel);
+  const picker = getDatePicker(panel);
+
+  if (trigger) {
+    trigger.setAttribute("aria-expanded", "false");
+  }
+
+  if (picker) {
+    picker.classList.add("hidden");
+    picker.setAttribute("aria-hidden", "true");
+  }
+}
+
+function openDatePicker(panel) {
+  [inputPanel, editorPanel].forEach((targetPanel) => {
+    if (targetPanel && targetPanel !== panel) {
+      closeDatePicker(targetPanel);
+    }
+  });
+
+  const trigger = getDateTrigger(panel);
+  const picker = getDatePicker(panel);
+
+  if (trigger) {
+    trigger.setAttribute("aria-expanded", "true");
+  }
+
+  if (picker) {
+    picker.classList.remove("hidden");
+    picker.setAttribute("aria-hidden", "false");
+  }
+}
+
+function getPickerView(panel) {
+  const picker = getDatePicker(panel);
+  const today = new Date();
+  const year = Number(picker?.dataset.viewYear || today.getFullYear());
+  const month = Number(picker?.dataset.viewMonth || today.getMonth());
+
+  return { year, month };
+}
+
+function setPickerView(panel, year, month) {
+  const picker = getDatePicker(panel);
+  if (!picker) return;
+
+  picker.dataset.viewYear = String(year);
+  picker.dataset.viewMonth = String(month);
+}
+
+function renderDatePicker(panel) {
+  const grid = getDateGrid(panel);
+  const monthLabel = getDateMonthLabel(panel);
+
+  if (!grid || !monthLabel) return;
+
+  const { year, month } = getPickerView(panel);
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const selectedParts = getDateParts(getDateInput(panel)?.value);
+
+  monthLabel.textContent = `${DATE_PICKER_MONTHS[month]} ${year}`;
+  grid.innerHTML = "";
+
+  for (let i = 0; i < firstDay; i += 1) {
+    const spacer = document.createElement("span");
+    spacer.className = "date-grid-spacer";
+    grid.appendChild(spacer);
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    const dayButton = document.createElement("button");
+    dayButton.type = "button";
+    dayButton.className = "date-day-btn";
+    dayButton.dataset.dateDay = String(day);
+    dayButton.textContent = String(day);
+
+    const isSelected =
+      selectedParts &&
+      selectedParts.year === year &&
+      selectedParts.month === month + 1 &&
+      selectedParts.day === day;
+
+    if (isSelected) {
+      dayButton.classList.add("is-selected");
+    }
+
+    grid.appendChild(dayButton);
+  }
+}
+
+function setDateField(panel, dateValue) {
+  const input = getDateInput(panel);
+  const label = getDateLabel(panel);
+
+  if (!input || !label) return;
+
+  const parts = getDateParts(dateValue);
+  if (!parts) {
+    input.value = "";
+    label.textContent = "Set Date";
+    const now = new Date();
+    setPickerView(panel, now.getFullYear(), now.getMonth());
+    renderDatePicker(panel);
+    return;
+  }
+
+  const normalizedStorage = normalizeDateForStorage(
+    `${parts.month}/${parts.day}/${parts.year}`,
+  );
+
+  input.value = normalizedStorage || "";
+  label.textContent = formatDateDisplay(normalizedStorage);
+  setPickerView(panel, parts.year, parts.month - 1);
+  renderDatePicker(panel);
+}
+
+function getDateValueForStorage(panel) {
+  return getDateInput(panel)?.value || null;
+}
+
+function clearDateField(panel) {
+  setDateField(panel, "");
+}
+
+function bindDateField(panel) {
+  if (!panel || panel.dataset.dateBound === "true") return;
+
+  const trigger = getDateTrigger(panel);
+  const picker = getDatePicker(panel);
+  const grid = getDateGrid(panel);
+  const prevButton = panel.querySelector("[data-date-prev]");
+  const nextButton = panel.querySelector("[data-date-next]");
+  const input = getDateInput(panel);
+
+  if (!trigger || !picker || !grid || !prevButton || !nextButton || !input) {
+    return;
+  }
+
+  panel.dataset.dateBound = "true";
+  const initialParts = getDateParts(input.value);
+  if (initialParts) {
+    setPickerView(panel, initialParts.year, initialParts.month - 1);
+  } else {
+    const now = new Date();
+    setPickerView(panel, now.getFullYear(), now.getMonth());
+  }
+  renderDatePicker(panel);
+
+  trigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (picker.classList.contains("hidden")) {
+      openDatePicker(panel);
+      renderDatePicker(panel);
+    } else {
+      closeDatePicker(panel);
+    }
+  });
+
+  trigger.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    trigger.click();
+  });
+
+  prevButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const { year, month } = getPickerView(panel);
+    const previousDate = new Date(year, month - 1, 1);
+    setPickerView(panel, previousDate.getFullYear(), previousDate.getMonth());
+    renderDatePicker(panel);
+  });
+
+  nextButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const { year, month } = getPickerView(panel);
+    const nextDate = new Date(year, month + 1, 1);
+    setPickerView(panel, nextDate.getFullYear(), nextDate.getMonth());
+    renderDatePicker(panel);
+  });
+
+  grid.addEventListener("click", (event) => {
+    const dayButton = event.target.closest("[data-date-day]");
+    if (!dayButton) return;
+
+    const { year, month } = getPickerView(panel);
+    const selectedDay = Number(dayButton.dataset.dateDay);
+    const selectedDate = normalizeDateForStorage(
+      `${month + 1}/${selectedDay}/${year}`,
+    );
+
+    setDateField(panel, selectedDate);
+    closeDatePicker(panel);
+  });
+
+  picker.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  if (!datePickerOutsideBound) {
+    datePickerOutsideBound = true;
+    document.addEventListener("click", (event) => {
+      [inputPanel, editorPanel].forEach((targetPanel) => {
+        if (!targetPanel) return;
+        const triggerEl = getDateTrigger(targetPanel);
+        const pickerEl = getDatePicker(targetPanel);
+        const clickedInsideTrigger = triggerEl?.contains(event.target);
+        const clickedInsidePicker = pickerEl?.contains(event.target);
+
+        if (!clickedInsideTrigger && !clickedInsidePicker) {
+          closeDatePicker(targetPanel);
+        }
+      });
+    });
+  }
+
+  setDateField(panel, input.value);
+}
+
 function getActiveProjectName() {
   return document.querySelector(".project-item.active")?.dataset.projectName;
 }
@@ -130,7 +400,7 @@ function renderDetailsPanel(todo) {
   }
 
   if (dateEl) {
-    dateEl.textContent = todo?.dueDate || "No due date";
+    dateEl.textContent = formatDateDisplay(todo?.dueDate);
   }
 }
 
@@ -284,10 +554,12 @@ function bindAddTaskButton() {
   if (!taskInputPlaceholder || !inputPanel) return;
 
   bindPriorityDropdowns();
+  bindDateField(inputPanel);
 
   taskInputPlaceholder.addEventListener("click", () => {
     setPrioritySelection(inputPanel, DEFAULT_PRIORITY);
     closePriorityMenu(inputPanel);
+    clearDateField(inputPanel);
     showPanel(inputPanel);
   });
 
@@ -313,6 +585,7 @@ function bindAddTaskButton() {
       const todoData = {
         taskName: title,
         description: descInput?.value.trim() || "",
+        dueDate: getDateValueForStorage(inputPanel),
         priority: getPrioritySelection(inputPanel),
       };
 
@@ -322,6 +595,7 @@ function bindAddTaskButton() {
       // clear form and hide
       nameInput.value = "";
       if (descInput) descInput.value = "";
+      clearDateField(inputPanel);
       hidePanel(inputPanel);
     });
   }
@@ -349,6 +623,7 @@ function bindEditTaskButtons() {
     if (nameInput) nameInput.value = todo.taskName || "";
     if (descInput) descInput.value = todo.description || "";
     setPrioritySelection(editorPanel, todo.priority || DEFAULT_PRIORITY);
+    setDateField(editorPanel, todo.dueDate || "");
 
     // stash id on panel for later
     editorPanel.dataset.editingTodoId = todo.id;
@@ -379,6 +654,7 @@ function bindEditTaskButtons() {
   if (!taskDetailsPanel || !editorPanel) return;
 
   bindPriorityDropdowns();
+  bindDateField(editorPanel);
 
   taskDetailsPanel.addEventListener("click", (event) => {
     const editButton = event.target.closest(".btn-edit");
@@ -420,6 +696,7 @@ function bindEditTaskButtons() {
         const updated = {
           taskName: nameInput?.value.trim() || "",
           description: descInput?.value.trim() || "",
+          dueDate: getDateValueForStorage(editorPanel),
           priority: getPrioritySelection(editorPanel),
         };
         Storage.updateTodoInProject(projectName, todoId, updated);
@@ -532,6 +809,7 @@ function CancelBtn() {
       inputs.forEach((input) => {
         input.value = "";
       });
+      clearDateField(inputPanel);
     });
   }
 }

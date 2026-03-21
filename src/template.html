@@ -168,15 +168,55 @@
               </div>
 
               <div class="form-group">
-                <div class="date-picker-trigger">
-                  <img
-                    src="./assets/images/calender-icon.png"
-                    class="calender-icon"
-                    alt="calender icon"
-                  />
-                  <p class="input-txt">
-                    <span class="date-picker-label">Set Date</span>
-                  </p>
+                <div class="date-picker-field">
+                  <div
+                    class="date-picker-trigger"
+                    data-date-trigger
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="./assets/images/calender-icon.png"
+                      class="calender-icon"
+                      alt="calender icon"
+                    />
+                    <p class="input-txt">
+                      <span class="date-picker-label" data-date-label>
+                        Set Date
+                      </span>
+                    </p>
+                  </div>
+
+                  <input type="hidden" data-due-date-input />
+
+                  <div
+                    class="date-picker-popup hidden"
+                    data-date-picker
+                    aria-hidden="true"
+                  >
+                    <div class="date-picker-header">
+                      <button type="button" class="date-nav-btn" data-date-prev>
+                        &lt;
+                      </button>
+                      <span class="date-month-label" data-date-month-label>
+                        January 2026
+                      </span>
+                      <button type="button" class="date-nav-btn" data-date-next>
+                        &gt;
+                      </button>
+                    </div>
+                    <div class="date-weekday-row">
+                      <span>Su</span>
+                      <span>Mo</span>
+                      <span>Tu</span>
+                      <span>We</span>
+                      <span>Th</span>
+                      <span>Fr</span>
+                      <span>Sa</span>
+                    </div>
+                    <div class="date-grid" data-date-grid></div>
+                  </div>
                 </div>
               </div>
 
@@ -281,13 +321,51 @@ I need to marry her ASAP</textarea
 
               <label class="input-label">Due Date:</label>
               <div class="form-group">
-                <div class="date-picker-display">
-                  <img
-                    src="./assets/images/calender-icon.png"
-                    class="calender-icon"
-                    alt="calender icon"
-                  />
-                  <span class="date-text">24/05/25</span>
+                <div class="date-picker-field">
+                  <div
+                    class="date-picker-display"
+                    data-date-trigger
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="./assets/images/calender-icon.png"
+                      class="calender-icon"
+                      alt="calender icon"
+                    />
+                    <span class="date-text" data-date-label>Set Date</span>
+                  </div>
+
+                  <input type="hidden" data-due-date-input />
+
+                  <div
+                    class="date-picker-popup hidden"
+                    data-date-picker
+                    aria-hidden="true"
+                  >
+                    <div class="date-picker-header">
+                      <button type="button" class="date-nav-btn" data-date-prev>
+                        &lt;
+                      </button>
+                      <span class="date-month-label" data-date-month-label>
+                        January 2026
+                      </span>
+                      <button type="button" class="date-nav-btn" data-date-next>
+                        &gt;
+                      </button>
+                    </div>
+                    <div class="date-weekday-row">
+                      <span>Su</span>
+                      <span>Mo</span>
+                      <span>Tu</span>
+                      <span>We</span>
+                      <span>Th</span>
+                      <span>Fr</span>
+                      <span>Sa</span>
+                    </div>
+                    <div class="date-grid" data-date-grid></div>
+                  </div>
                 </div>
               </div>
 
