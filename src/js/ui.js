@@ -66,6 +66,74 @@ function getPriorityDot(panel) {
   return panel?.querySelector("[data-priority-dot]") || null;
 }
 
+function getDetailsTitle() {
+  return taskDetailsPanel?.querySelector(".title-text") || null;
+}
+
+function getDetailsDescription() {
+  return taskDetailsPanel?.querySelector(".description-text") || null;
+}
+
+function getDetailsPriorityLabel() {
+  return taskDetailsPanel?.querySelector(".priority-display .text") || null;
+}
+
+function getDetailsPriorityDot() {
+  return (
+    taskDetailsPanel?.querySelector(".priority-display .color-dot") || null
+  );
+}
+
+function getDetailsDate() {
+  return taskDetailsPanel?.querySelector(".date-display .text") || null;
+}
+
+function getActiveProjectName() {
+  return document.querySelector(".project-item.active")?.dataset.projectName;
+}
+
+function getTodoForDetails(todoId) {
+  const projectName = getActiveProjectName();
+  if (!projectName || !todoId) return null;
+
+  return (
+    Storage.getProjectTodos(projectName).find((todo) => todo.id === todoId) ||
+    null
+  );
+}
+
+function renderDetailsPanel(todo) {
+  const titleEl = getDetailsTitle();
+  const descriptionEl = getDetailsDescription();
+  const priorityLabelEl = getDetailsPriorityLabel();
+  const priorityDotEl = getDetailsPriorityDot();
+  const dateEl = getDetailsDate();
+
+  if (titleEl) {
+    titleEl.textContent = todo?.taskName || "";
+  }
+
+  if (descriptionEl) {
+    descriptionEl.textContent = todo?.description || "No description";
+  }
+
+  const priority = todo?.priority || DEFAULT_PRIORITY;
+  const priorityConfig = getPriorityConfig(priority);
+
+  if (priorityLabelEl) {
+    priorityLabelEl.textContent = priorityConfig.label;
+  }
+
+  if (priorityDotEl) {
+    priorityDotEl.classList.remove(...PRIORITY_DOT_CLASSES);
+    priorityDotEl.classList.add(priorityConfig.dotClass);
+  }
+
+  if (dateEl) {
+    dateEl.textContent = todo?.dueDate || "No due date";
+  }
+}
+
 function closePriorityMenu(panel) {
   const trigger = getPriorityTrigger(panel);
   const menu = getPriorityMenu(panel);
@@ -390,7 +458,9 @@ function bindTaskCardClicks() {
     const taskCard = event.target.closest(".task-card");
     if (!taskCard) return;
 
-    taskDetailsPanel.dataset.todoId = taskCard.dataset.todoId || "";
+    const todoId = taskCard.dataset.todoId || "";
+    taskDetailsPanel.dataset.todoId = todoId;
+    renderDetailsPanel(getTodoForDetails(todoId));
     showPanel(taskDetailsPanel);
   });
 }
