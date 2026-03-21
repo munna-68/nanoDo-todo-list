@@ -7,6 +7,22 @@ import { Storage } from "./js/storage";
 import { DeleteProject } from "./js/deleteProject";
 
 /* ----------------------------------
+   Preloader
+   ---------------------------------- */
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    setTimeout(() => {
+      preloader.style.opacity = "0";
+      preloader.style.visibility = "hidden";
+      setTimeout(() => {
+        preloader.remove();
+      }, 500);
+    }, 1500);
+  }
+});
+
+/* ----------------------------------
    Initialization
    ---------------------------------- */
 
