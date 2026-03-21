@@ -107,17 +107,64 @@
                 ></textarea>
               </div>
 
-              <div class="form-group">
-                <div class="custom-select-trigger">
+              <div
+                class="form-group priority-select-group"
+                data-priority-select
+              >
+                <div
+                  class="custom-select-trigger priority-select-trigger"
+                  data-priority-trigger
+                  aria-expanded="false"
+                >
                   <div class="select-label">
-                    <div class="color-dot color-dot--red"></div>
-                    <p class="input-txt">Set Priority</p>
+                    <div
+                      class="color-dot color-dot--green"
+                      data-priority-dot
+                    ></div>
+                    <p class="input-txt" data-priority-label>Low Priority</p>
                   </div>
                   <img
                     src="./assets/images/dropdown-icon.png"
                     alt="dropdown icon"
                   />
                 </div>
+
+                <ul
+                  class="priority-dropdown hidden"
+                  data-priority-menu
+                  aria-hidden="true"
+                >
+                  <li>
+                    <button
+                      type="button"
+                      class="priority-option"
+                      data-priority-option="high"
+                    >
+                      <span class="color-dot color-dot--red"></span>
+                      <span class="priority-option-text">High Priority</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="priority-option"
+                      data-priority-option="medium"
+                    >
+                      <span class="color-dot color-dot--yellow"></span>
+                      <span class="priority-option-text">Medium Priority</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="priority-option is-selected"
+                      data-priority-option="low"
+                    >
+                      <span class="color-dot color-dot--green"></span>
+                      <span class="priority-option-text">Low Priority</span>
+                    </button>
+                  </li>
+                </ul>
               </div>
 
               <div class="form-group">
@@ -172,17 +219,64 @@ I need to marry her ASAP</textarea
               </div>
 
               <label class="input-label">Priority Level:</label>
-              <div class="form-group">
-                <div class="custom-select custom-select-trigger">
+              <div
+                class="form-group priority-select-group"
+                data-priority-select
+              >
+                <div
+                  class="custom-select custom-select-trigger priority-select-trigger"
+                  data-priority-trigger
+                  aria-expanded="false"
+                >
                   <div class="select-value">
-                    <div class="color-dot color-dot--red"></div>
-                    <p class="input-txt">High</p>
+                    <div
+                      class="color-dot color-dot--green"
+                      data-priority-dot
+                    ></div>
+                    <p class="input-txt" data-priority-label>Low Priority</p>
                   </div>
                   <img
                     src="./assets/images/dropdown-icon.png"
                     alt="dropdown icon"
                   />
                 </div>
+
+                <ul
+                  class="priority-dropdown hidden"
+                  data-priority-menu
+                  aria-hidden="true"
+                >
+                  <li>
+                    <button
+                      type="button"
+                      class="priority-option"
+                      data-priority-option="high"
+                    >
+                      <span class="color-dot color-dot--red"></span>
+                      <span class="priority-option-text">High Priority</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="priority-option"
+                      data-priority-option="medium"
+                    >
+                      <span class="color-dot color-dot--yellow"></span>
+                      <span class="priority-option-text">Medium Priority</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="priority-option is-selected"
+                      data-priority-option="low"
+                    >
+                      <span class="color-dot color-dot--green"></span>
+                      <span class="priority-option-text">Low Priority</span>
+                    </button>
+                  </li>
+                </ul>
               </div>
 
               <label class="input-label">Due Date:</label>

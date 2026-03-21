@@ -414,6 +414,11 @@ p {
   box-shadow: 0px 4.06px 4.06px 0px rgba(0, 0, 0, 0.25);
 }
 
+.priority-select-group {
+  position: relative;
+  overflow: visible;
+}
+
 .input-txt {
   font-family: "Roboto Condensed";
   font-style: normal;
@@ -425,6 +430,17 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.priority-select-trigger img {
+  transition: transform 0.2s ease;
+}
+
+.priority-select-trigger.is-open img {
+  transform: rotate(180deg);
 }
 
 .date-picker-trigger {
@@ -459,8 +475,55 @@ p {
 
 .select-label {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.priority-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 0.4rem 0;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #f2f6d0;
+  box-shadow: 0px 4.06px 4.06px 0px rgba(0, 0, 0, 0.25);
+}
+
+.priority-dropdown li + li {
+  margin-top: 0.25rem;
+}
+
+.priority-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.15rem;
+  color: black;
+  text-align: left;
+}
+
+.priority-option:hover {
+  background-color: #dbd8cd;
+}
+
+.priority-option.is-selected {
+  background-color: #f5d569;
+}
+
+.priority-option .color-dot {
+  flex-shrink: 0;
+}
+
+.priority-option-text {
+  flex: 1;
 }
 
 .btn-save {
@@ -521,7 +584,7 @@ label {
 
 .select-value {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 

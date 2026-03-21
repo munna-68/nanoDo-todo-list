@@ -8,6 +8,30 @@ export const panels = [inputPanel, editorPanel, taskDetailsPanel].filter(
   Boolean,
 );
 
+const PRIORITY_CONFIG = {
+  high: {
+    label: "High Priority",
+    dotClass: "color-dot--red",
+  },
+  medium: {
+    label: "Medium Priority",
+    dotClass: "color-dot--yellow",
+  },
+  low: {
+    label: "Low Priority",
+    dotClass: "color-dot--green",
+  },
+};
+
+const DEFAULT_PRIORITY = "low";
+const PRIORITY_DOT_CLASSES = [
+  "color-dot--red",
+  "color-dot--yellow",
+  "color-dot--green",
+];
+
+let priorityDropdownsBound = false;
+
 function showPanel(activePanel) {
   panels.forEach((panel) => {
     panel.classList.toggle("hidden", panel !== activePanel);
@@ -16,6 +40,145 @@ function showPanel(activePanel) {
 
 function hidePanel(panel) {
   panel?.classList.add("hidden");
+}
+
+function getPriorityConfig(priority) {
+  return PRIORITY_CONFIG[priority] || PRIORITY_CONFIG[DEFAULT_PRIORITY];
+}
+
+function getPrioritySelect(panel) {
+  return panel?.querySelector("[data-priority-select]") || null;
+}
+
+function getPriorityTrigger(panel) {
+  return panel?.querySelector("[data-priority-trigger]") || null;
+}
+
+function getPriorityMenu(panel) {
+  return panel?.querySelector("[data-priority-menu]") || null;
+}
+
+function getPriorityLabel(panel) {
+  return panel?.querySelector("[data-priority-label]") || null;
+}
+
+function getPriorityDot(panel) {
+  return panel?.querySelector("[data-priority-dot]") || null;
+}
+
+function closePriorityMenu(panel) {
+  const trigger = getPriorityTrigger(panel);
+  const menu = getPriorityMenu(panel);
+
+  if (trigger) {
+    trigger.classList.remove("is-open");
+    trigger.setAttribute("aria-expanded", "false");
+  }
+
+  if (menu) {
+    menu.classList.add("hidden");
+    menu.setAttribute("aria-hidden", "true");
+  }
+}
+
+function openPriorityMenu(panel) {
+  const trigger = getPriorityTrigger(panel);
+  const menu = getPriorityMenu(panel);
+
+  if (trigger) {
+    trigger.classList.add("is-open");
+    trigger.setAttribute("aria-expanded", "true");
+  }
+
+  if (menu) {
+    menu.classList.remove("hidden");
+    menu.setAttribute("aria-hidden", "false");
+  }
+}
+
+function setPrioritySelection(panel, priority) {
+  const select = getPrioritySelect(panel);
+  if (!select) return;
+
+  const nextPriority = Object.prototype.hasOwnProperty.call(
+    PRIORITY_CONFIG,
+    priority,
+  )
+    ? priority
+    : DEFAULT_PRIORITY;
+  const config = getPriorityConfig(nextPriority);
+
+  select.dataset.selectedPriority = nextPriority;
+
+  const label = getPriorityLabel(panel);
+  if (label) {
+    label.textContent = config.label;
+  }
+
+  const dot = getPriorityDot(panel);
+  if (dot) {
+    dot.classList.remove(...PRIORITY_DOT_CLASSES);
+    dot.classList.add(config.dotClass);
+  }
+
+  const options = panel?.querySelectorAll("[data-priority-option]");
+  options?.forEach((option) => {
+    const isSelected = option.dataset.priorityOption === nextPriority;
+    option.classList.toggle("is-selected", isSelected);
+    option.setAttribute("aria-pressed", String(isSelected));
+  });
+}
+
+function getPrioritySelection(panel) {
+  return getPrioritySelect(panel)?.dataset.selectedPriority || DEFAULT_PRIORITY;
+}
+
+function bindPriorityDropdowns() {
+  if (priorityDropdownsBound) return;
+  priorityDropdownsBound = true;
+
+  const priorityPanels = [inputPanel, editorPanel].filter(Boolean);
+
+  priorityPanels.forEach((panel) => {
+    panel.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-priority-trigger]");
+      if (trigger && panel.contains(trigger)) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const menu = getPriorityMenu(panel);
+        if (menu?.classList.contains("hidden")) {
+          priorityPanels.forEach((otherPanel) => {
+            if (otherPanel !== panel) closePriorityMenu(otherPanel);
+          });
+          openPriorityMenu(panel);
+        } else {
+          closePriorityMenu(panel);
+        }
+        return;
+      }
+
+      const option = event.target.closest("[data-priority-option]");
+      if (option && panel.contains(option)) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        setPrioritySelection(panel, option.dataset.priorityOption);
+        closePriorityMenu(panel);
+      }
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    priorityPanels.forEach((panel) => {
+      const select = getPrioritySelect(panel);
+      if (!select || select.contains(event.target)) return;
+      closePriorityMenu(panel);
+    });
+  });
+
+  setPrioritySelection(inputPanel, DEFAULT_PRIORITY);
+  setPrioritySelection(editorPanel, DEFAULT_PRIORITY);
 }
 
 function toggleActiveProject(projectItem) {
@@ -52,7 +215,11 @@ function bindAddTaskButton() {
 
   if (!taskInputPlaceholder || !inputPanel) return;
 
+  bindPriorityDropdowns();
+
   taskInputPlaceholder.addEventListener("click", () => {
+    setPrioritySelection(inputPanel, DEFAULT_PRIORITY);
+    closePriorityMenu(inputPanel);
     showPanel(inputPanel);
   });
 
@@ -78,7 +245,7 @@ function bindAddTaskButton() {
       const todoData = {
         taskName: title,
         description: descInput?.value.trim() || "",
-        // priority and dueDate UI not wired; will default in Storage
+        priority: getPrioritySelection(inputPanel),
       };
 
       Storage.addTodoToProject(projectName, todoData);
@@ -113,6 +280,7 @@ function bindEditTaskButtons() {
 
     if (nameInput) nameInput.value = todo.taskName || "";
     if (descInput) descInput.value = todo.description || "";
+    setPrioritySelection(editorPanel, todo.priority || DEFAULT_PRIORITY);
 
     // stash id on panel for later
     editorPanel.dataset.editingTodoId = todo.id;
@@ -142,11 +310,27 @@ function bindEditTaskButtons() {
 
   if (!taskDetailsPanel || !editorPanel) return;
 
+  bindPriorityDropdowns();
+
   taskDetailsPanel.addEventListener("click", (event) => {
     const editButton = event.target.closest(".btn-edit");
     if (!editButton) return;
 
     event.stopPropagation();
+
+    const activeProjectItem = document.querySelector(".project-item.active");
+    const todoId = taskDetailsPanel.dataset.todoId;
+
+    if (todoId && activeProjectItem) {
+      const projectName = activeProjectItem.dataset.projectName;
+      const todo = Storage.getProjectTodos(projectName).find(
+        (item) => item.id === todoId,
+      );
+      if (todo) {
+        populateEditor(todo);
+      }
+    }
+
     showPanel(editorPanel);
   });
 
@@ -168,6 +352,7 @@ function bindEditTaskButtons() {
         const updated = {
           taskName: nameInput?.value.trim() || "",
           description: descInput?.value.trim() || "",
+          priority: getPrioritySelection(editorPanel),
         };
         Storage.updateTodoInProject(projectName, todoId, updated);
         Storage.renderTodosForProject(projectName);
@@ -205,6 +390,7 @@ function bindTaskCardClicks() {
     const taskCard = event.target.closest(".task-card");
     if (!taskCard) return;
 
+    taskDetailsPanel.dataset.todoId = taskCard.dataset.todoId || "";
     showPanel(taskDetailsPanel);
   });
 }
